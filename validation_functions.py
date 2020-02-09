@@ -266,7 +266,7 @@ def writeCSS(path):
     f.write("  white-space: nowrap;\n")
     f.write("}\n")
     f.write(".hover_img a { position:relative; }\n")
-    f.write(".hover_img a span { position:absolute; display:none; z-index:99; left:200%; top: -1000%;  }\n")
+    f.write(".hover_img a span { position:absolute; display:none; z-index:99; left:200px; top: -1000%;  }\n")
     f.write(".hover_img a:hover span {display:block; opacity: 0.95;}\n")
     f.write("img {\n")
     f.write("  float: right;\n")
