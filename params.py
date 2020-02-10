@@ -25,7 +25,7 @@ snrmax=None
 imsize=20  
 
 #make the individual plots for sources (i.e., png files)
-makePlotsForSources=True
+makePlotsForSources=False
 
 #make plots for the residual cube?
 doResiduals=True
@@ -34,7 +34,7 @@ doResiduals=True
 doWeights=True
 
 #make a tar archive of the FITS files?
-makeTar = True
+makeTar = False
 
 #run full validation to the end 
 # else just creates summary csv files (from selavy) and tabulates the spectra and saves

@@ -164,7 +164,7 @@ def doValidation(var, filtered_csv, merged_csv, makePlotsForSources, doResiduals
     vu.makeVvsDist(filtered["Dist to centre"].values, vStats['Sixteenth']/iStats['Sixteenth'], vStats['EightyForth']/iStats['EightyForth'], vStats['Medians']/iStats['Medians'], vStats['StDev']/iStats['StDev'], "V/I vs Distance from mosaic centre (degrees)", fluxmin, fluxmax, path+plotfilename)
     image_links.append(vf.makeHoverLink(plotfilename,"Stokes V/I vs dist from mosaic centre"))
     
-    plotfilename="plots/stokesV_vs_dist_from_beam_centre.png"
+    plotfilename="plots/stokesVoverI_vs_dist_from_beam_centre.png"
     vu.makeVvsDist(filtered["Dist to beam"].values, vStats['Sixteenth']/iStats['Sixteenth'], vStats['EightyForth']/iStats['EightyForth'], vStats['Medians']/iStats['Medians'], vStats['StDev']/iStats['StDev'],"V/I vs Distance from beam centre (degrees)", fluxmin, fluxmax, path+plotfilename)
     image_links.append(vf.makeHoverLink(plotfilename,"Stokes V/I vs dist from beam centre"))
 
@@ -250,11 +250,11 @@ def doValidation(var, filtered_csv, merged_csv, makePlotsForSources, doResiduals
         image_links.append(vf.makeHoverLink(plotfilename,"Stokes U histogram - Weights"))
 
         plotfilename="plots/StokesInoiseWeightsvsfreq.png"
-        vu.makeScatter(i_wtStats['Freq'][0], np.nanmean(i_wtStats['EdgePix'],axis=0), np.zeros(i_wtStats['Freq'][0].shape), np.nanstd(i_wtStats['EdgePix'],axis=0), np.nanmin(np.array(i_wtStats['Freq'][0])), np.nanmax(np.array(i_wtStats['Freq'][0])),-2.5*np.nanstd(i_wtStats['EdgePix']), 2.5*np.nanstd(i_wtStats['EdgePix']), "Freq (Hz)", "Stokes I Resiuals Uncertainty (off source)", "Average Stokes I Resiuals Uncertainty (off source) vs Freq ("+str(numSources)+" sources)", path+plotfilename)
+        vu.makeScatter(i_wtStats['Freq'][0], np.nanmean(i_wtStats['EdgePix'],axis=0), np.zeros(i_wtStats['Freq'][0].shape), np.nanstd(i_wtStats['EdgePix'],axis=0), np.nanmin(np.array(i_wtStats['Freq'][0])), np.nanmax(np.array(i_wtStats['Freq'][0])),0., 5*np.nanstd(i_wtStats['EdgePix']), "Freq (Hz)", "Stokes I Resiuals Uncertainty (off source)", "Average Stokes I Resiuals Uncertainty (off source) vs Freq ("+str(numSources)+" sources)", path+plotfilename)
         image_links.append(vf.makeHoverLink(plotfilename,"Average Stokes I Weights Uncertainty (off source) vs Freq"))
         
         plotfilename="plots/StokesVnoiseWeightsvsfreq.png"
-        vu.makeScatter(v_wtStats['Freq'][0], np.nanmean(v_wtStats['EdgePix'],axis=0), np.zeros(v_wtStats['Freq'][0].shape), np.nanstd(v_wtStats['EdgePix'],axis=0), np.nanmin(np.array(v_wtStats['Freq'][0])), np.nanmax(np.array(v_wtStats['Freq'][0])), -2.5*np.nanstd(v_wtStats['EdgePix']), 2.5*np.nanstd(v_wtStats['EdgePix']), "Freq (Hz)", "Stokes V Resiuals Uncertainty (off source)", "Average Stokes V Resiuals Uncertainty (off source) vs Freq ("+str(numSources)+" sources)", path+plotfilename)
+        vu.makeScatter(v_wtStats['Freq'][0], np.nanmean(v_wtStats['EdgePix'],axis=0), np.zeros(v_wtStats['Freq'][0].shape), np.nanstd(v_wtStats['EdgePix'],axis=0), np.nanmin(np.array(v_wtStats['Freq'][0])), np.nanmax(np.array(v_wtStats['Freq'][0])), 0., 5*np.nanstd(v_wtStats['EdgePix']), "Freq (Hz)", "Stokes V Resiuals Uncertainty (off source)", "Average Stokes V Resiuals Uncertainty (off source) vs Freq ("+str(numSources)+" sources)", path+plotfilename)
         image_links.append(vf.makeHoverLink(plotfilename,"Average Stokes V Weights Uncertainty (off source) vs Freq"))
 
 ###################### Make tables for webpage ###############################
