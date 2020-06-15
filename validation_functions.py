@@ -48,7 +48,7 @@ def pipelineFiles(path, base, sb):
 
     #metadata
     footfile=path+"metadata/footprintOutput-sb"+str(sb[0:sb.find('.')])+"-"+base+".txt" #'../newfootprint.dat'
-    footfile=path+"metadata/footprintOutput-sb10168-POSSUM_2140-50.txt"
+    #footfile=path+"metadata/footprintOutput-sb10168-POSSUM_2140-50.txt"
 
     #mslist file: check if there is more than one (not including the cal one)
     numfiles=0
@@ -61,8 +61,8 @@ def pipelineFiles(path, base, sb):
 
     #Oppermann FD map is used to calculate a FD for the field that can be used for
     #comparison
-    opDataFile='/scratch/b/bmg/westjl/scripts/validation/2015_phi_map.fits'
-    opErrFile='/scratch/b/bmg/westjl/scripts/validation/2015_phi_err_map.fits'
+    opDataFile='data/2015_phi_map.fits'
+    opErrFile='data/2015_phi_err_map.fits'
     
     files={'iCube':   in_i,\
            'qCube':   in_q,\

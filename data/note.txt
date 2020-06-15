@@ -1,0 +1,23 @@
+2015_phi_map.fits is the healpix slice for Galactic FD
+2015_phi_err_map.fits is the healpix slice for Galactic FD uncertainties
+
+Read the map by:
+data = hp.read_map('2015_phi_map.fits')
+
+View the map by:
+hp.mollview(data, min=-500., max=500.)
+plt.show()
+
+View the zoom-able map by:
+hp.mollzoom(data, min=-500., max=500.)
+plt.show()
+
+To query the value of a particular (Galactic) coordinate:
+data[hp.ang2pix(128, <Gal_Lon>, <Gal_Lat>, lonlat=True)]
+** 128 is the nside for the Oppermann et al. (2015) map
+** Gal_Lon & Gal_Lat are in degrees, despite the online webpage saying it should be in radian...
+
+The above ang2pix function returns the pixel number <px#>given the pixel side (nside; 128 for Oppermann) and sky coordinates. Then, the pixel value of that pixel number is directly read by data[<px#>]
+
+
+
