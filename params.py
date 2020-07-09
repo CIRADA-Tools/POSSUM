@@ -2,16 +2,22 @@
 #python initValidation.py /home/b/bmg/westjl/jlwscratch/pilot/10168/ 10168 "" 500.0 10000.0
 
 #ASKAP specific variables
-sb='10168'
+sb='9945'
 base=""
 
 #root path to pipeline files (image cubes and source finding output)
-path="/home/b/bmg/westjl/jlwscratch/pilot/10168/"
+path="/askapbuffer/scott/askapops/POSSUM-PILOT/"+sb
+outpath="temp"
+
+#account="rrg-eros-ab"
+
+account="askap"
+
 
 #location of output files
-variables=path+"validation/variables.pickle"
-filtered_csv=path+"validation/filtered.csv"
-merged_csv=path+"validation/merged.csv"
+variables=outpath+"validation/variables.pickle"
+filtered_csv=outpath+"validation/filtered.csv"
+merged_csv=outpath+"validation/merged.csv"
 
 #cutoffs for filtering source list
 fluxmin=2.0    #mJy/beam

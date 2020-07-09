@@ -303,6 +303,38 @@ def make_sbatch(sbatch, account, time, nodes, ntasks, sb, slurmout, pickleout, i
 
     f.close()
 
+def make_galaxy_sbatch(sbatch, account, time, nodes, ntasks, sb, slurmout, pickleout, incube, filtered_csv, imsize, runValidation, makeTar, path):
+
+    f=open(sbatch, 'a')
+    f.write("#!/bin/bash -l\n")
+    
+    f.write("#SBATCH --account="+account+"\n") # account="rrg-eros-ab"
+    f.write("#SBATCH --time="+time+"\n") #time="6:00:00"
+    f.write("#SBATCH --nodes="+nodes+"\n")
+    f.write("#SBATCH --ntasks="+ntasks+"\n")
+    f.write("#SBATCH --job-name=validation-"+sb+"\n")
+    f.write("#SBATCH --output=\'"+slurmout+"\'"+"\n") #slurmout="/scratch/b/bmg/westjl/slurmout/slurm-validation-%j.out"
+`   f.write("#SBATCH --export=NONE\n")
+	f.write("#SBATCH --clusters=galaxy\n")
+	f.write("#SBATCH --partition=workq\n")
+	 #for galaxy
+    f.write("module load polVal"+"\n")
+
+    for i in range(len(pickleout)):
+        f.write("srun --export=ALL --ntasks="+ntasks+" --ntasks-per-node="+ntasks+" python tabulateSpectra.py "+pickleout[i]+" "+incube[i] +" & \n") # --cpu_bind=cores re.sub('[\[\]]', '', np.array_str(ra[i], precision=2))+" "+re.sub('[\[\]]', '', np.array_str(dec[i],precision=2))
+        
+        #f.write("$parallel \"srun -n1 python tabulateSpectra.py "+pickleout[i]+" "+incube[i]+"\"\n")
+    #f.write("$parallel \"srun --exclusive -n1 python tabulateSpectra.py "+pickleout[len(pickleout)-1]+" "+incube[len(pickleout)-1]+"\"\n")
+    f.write("wait\n")
+    if(runValidation):
+        f.write("python doValidation.py\n")
+    if(makeTar):
+        f.write("tar -cf "+path +"/plots/fitsim.tar "+ path + "/polIm")
+
+    f.close()
+
+
+
 def tabulateSpectra(pickleout, incube, filtered_csv, imsize):
 
     #get source statistics

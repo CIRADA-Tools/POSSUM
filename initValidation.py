@@ -24,8 +24,10 @@ import params
 
 
 path = params.path
+outpath = params.outpath
 sb = params.sb
 base = params.base
+account = params.account
 runValidation = params.runValidation
 doResiduals = params.doResiduals
 doWeights = params.doWeights
@@ -151,13 +153,15 @@ def initValidation(path, sb, base, fluxmin=None, fluxmax=None, polmin=None, polm
 
 	#sbatch file parameters 
 	sbatch=path+"validation/tabulateSpectra.sbatch"
-	account="rrg-eros-ab"
+	account = account
 	time="8:00:00"
 	nodes="1"
 	ntasks=str(len(incube)+1)
-	slurmout="/scratch/b/bmg/westjl/slurmout/slurm-tabulateSpectra-%j.out"
+	#slurmout="/scratch/b/bmg/westjl/slurmout/slurm-tabulateSpectra-%j.out"
+	slurmout=outpath+"/possum-validation-"+sb+"-%j.out"
+	
 	#create the sbatch script that tabulates the spectrum and saves them to pickle files
-	vf.make_sbatch(sbatch, account, time, nodes, ntasks, sb, slurmout, pickleout, incube, filtered_csv, imsize, runValidation, makeTar, path)
+	vf.make_galaxy_sbatch(sbatch, account, time, nodes, ntasks, sb, slurmout, pickleout, incube, filtered_csv, imsize, runValidation, makeTar, path)
 	#run the sbatch script
 	os.system('sbatch '+sbatch)
 
